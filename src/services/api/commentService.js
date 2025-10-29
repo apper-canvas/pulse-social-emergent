@@ -67,15 +67,19 @@ export const commentService = {
     return true;
   },
 
-  async like(id) {
+async like(id) {
     await delay(200);
     const comment = commentData.find(c => c.Id === parseInt(id));
     if (!comment) {
       throw new Error("Comment not found");
     }
     
-    comment.likes += 1;
-    console.log("Liked comment:", id);
-    return comment;
+    comment.likes = (comment.likes || 0) + 1;
+    
+    if (!comment.likedBy) {
+      comment.likedBy = [];
+    }
+    
+    return { ...comment };
   }
 };

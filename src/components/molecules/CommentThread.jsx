@@ -1,16 +1,17 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { formatDistanceToNow } from "date-fns";
-import Avatar from "@/components/atoms/Avatar";
+import ApperIcon from "@/components/ApperIcon";
 import Button from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
-import ApperIcon from "@/components/ApperIcon";
+import Avatar from "@/components/atoms/Avatar";
 import { cn } from "@/utils/cn";
 
 const CommentThread = ({ 
   comments = [], 
   postId,
   onAddComment,
+  onLikeComment,
   currentUser,
   className,
   ...props 
@@ -18,6 +19,21 @@ const CommentThread = ({
   const [newComment, setNewComment] = useState("");
   const [replyingTo, setReplyingTo] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [likedComments, setLikedComments] = useState(new Set());
+  const [commentLikes, setCommentLikes] = useState({});
+
+  useEffect(() => {
+    const initialLiked = new Set();
+    const initialLikes = {};
+    comments.forEach(comment => {
+      if (comment.isLikedByCurrentUser) {
+        initialLiked.add(comment.Id);
+      }
+      initialLikes[comment.Id] = comment.likes || 0;
+    });
+    setLikedComments(initialLiked);
+    setCommentLikes(initialLikes);
+  }, [comments]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,11 +41,18 @@ const CommentThread = ({
 
     setIsSubmitting(true);
     try {
-      await onAddComment({
+const newCommentData = await onAddComment({
         content: newComment.trim(),
         postId,
         parentId: replyingTo,
       });
+      
+      if (newCommentData) {
+        setCommentLikes(prev => ({
+          ...prev,
+          [newCommentData.Id]: 0
+        }));
+      }
       setNewComment("");
       setReplyingTo(null);
     } catch (error) {
@@ -39,13 +62,35 @@ const CommentThread = ({
     }
   };
 
-  const handleReply = (commentId) => {
+const handleReply = (commentId) => {
     setReplyingTo(commentId);
   };
 
-  const handleLikeComment = (commentId) => {
-    // Handle comment like
-    console.log("Like comment:", commentId);
+  const handleLikeComment = async (commentId) => {
+    try {
+      const isLiked = likedComments.has(commentId);
+      
+      setLikedComments(prev => {
+        const newSet = new Set(prev);
+        if (isLiked) {
+          newSet.delete(commentId);
+        } else {
+          newSet.add(commentId);
+        }
+        return newSet;
+      });
+
+      setCommentLikes(prev => ({
+        ...prev,
+        [commentId]: isLiked ? (prev[commentId] || 0) - 1 : (prev[commentId] || 0) + 1
+      }));
+
+      if (onLikeComment) {
+        await onLikeComment(commentId);
+      }
+    } catch (error) {
+      console.error("Error liking comment:", error);
+    }
   };
 
   const renderComment = (comment, isReply = false) => (
@@ -76,16 +121,30 @@ const CommentThread = ({
           </div>
           <p className="text-gray-800 text-sm">{comment.content}</p>
         </div>
-        
-        <div className="flex items-center space-x-4 mt-2">
-          <button
-            onClick={() => handleLikeComment(comment.id)}
-            className="flex items-center space-x-1 text-xs text-gray-500 hover:text-primary transition-colors"
-          >
-            <ApperIcon name="Heart" size={14} />
-            <span>{comment.likes || 0}</span>
-          </button>
-          
+<div className="flex items-center space-x-4 mt-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => handleLikeComment(comment.Id)}
+            className={cn(
+              "transition-all duration-200",
+              likedComments.has(comment.Id) && "text-error"
+            )}
+            >
+            <motion.div
+              animate={likedComments.has(comment.Id) ? {
+                scale: [1, 1.3, 1],
+              } : {}}
+              transition={{ duration: 0.3 }}
+            >
+              <ApperIcon 
+                name={likedComments.has(comment.Id) ? "Heart" : "Heart"} 
+                size={16}
+                className={likedComments.has(comment.Id) ? "fill-current" : ""}
+              />
+            </motion.div>
+            <span>{commentLikes[comment.Id] || comment.likes || 0}</span>
+          </Button>
           {!isReply && (
             <button
               onClick={() => handleReply(comment.id)}

@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { formatDistanceToNow } from "date-fns";
 import Avatar from "@/components/atoms/Avatar";
 import Button from "@/components/atoms/Button";
 import Badge from "@/components/atoms/Badge";
 import ApperIcon from "@/components/ApperIcon";
+import CommentThread from "@/components/molecules/CommentThread";
 import { cn } from "@/utils/cn";
+import { commentService } from "@/services/api/commentService";
+import { toast } from "react-toastify";
 
 const PostCard = ({ 
   post, 
@@ -15,9 +18,31 @@ const PostCard = ({
   className,
   ...props 
 }) => {
-  const [isLiked, setIsLiked] = useState(false);
+const [isLiked, setIsLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(post.likes);
   const [showComments, setShowComments] = useState(false);
+  const [comments, setComments] = useState([]);
+  const [commentsCount, setCommentsCount] = useState(post.comments);
+  const [loadingComments, setLoadingComments] = useState(false);
+
+  useEffect(() => {
+    if (showComments && comments.length === 0) {
+      loadComments();
+    }
+  }, [showComments]);
+
+  const loadComments = async () => {
+    try {
+      setLoadingComments(true);
+      const postComments = await commentService.getByPostId(post.id);
+      setComments(postComments);
+    } catch (error) {
+      console.error("Error loading comments:", error);
+      toast.error("Failed to load comments");
+    } finally {
+      setLoadingComments(false);
+    }
+  };
 
   const handleLike = () => {
     setIsLiked(!isLiked);
@@ -25,9 +50,39 @@ const PostCard = ({
     onLike && onLike(post.id);
   };
 
-  const handleComment = () => {
+const handleComment = () => {
     setShowComments(!showComments);
     onComment && onComment(post.id);
+  };
+
+  const handleAddComment = async (commentData) => {
+    try {
+      const newComment = await commentService.create({
+        ...commentData,
+        authorId: "user1",
+        authorName: "Current User",
+        authorAvatar: "https://images.unsplash.com/photo-1494790108755-2616b612b1c5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      });
+      
+      setComments(prev => [...prev, newComment]);
+      setCommentsCount(prev => prev + 1);
+      toast.success("Comment added successfully!");
+      return newComment;
+    } catch (error) {
+      console.error("Error adding comment:", error);
+      toast.error("Failed to add comment");
+      throw error;
+    }
+  };
+
+  const handleLikeComment = async (commentId) => {
+    try {
+      await commentService.like(commentId);
+      toast.success("Comment liked!");
+    } catch (error) {
+      console.error("Error liking comment:", error);
+      toast.error("Failed to like comment");
+    }
   };
 
   const handleShare = () => {
@@ -123,8 +178,8 @@ src={post.imageUrl}
               onClick={handleComment}
               className="flex items-center space-x-2 text-gray-500 hover:text-primary transition-all duration-200"
             >
-              <ApperIcon name="MessageCircle" size={20} />
-              <span className="text-sm font-medium">{post.comments}</span>
+<ApperIcon name="MessageCircle" size={20} />
+              <span className="text-sm font-medium">{commentsCount}</span>
             </motion.button>
 
             <motion.button
@@ -147,6 +202,33 @@ src={post.imageUrl}
           </motion.button>
         </div>
       </div>
+{showComments && (
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto" }}
+          exit={{ opacity: 0, height: 0 }}
+          transition={{ duration: 0.3 }}
+          className="border-t border-gray-100 pt-4"
+        >
+          {loadingComments ? (
+            <div className="flex items-center justify-center py-8">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+            </div>
+          ) : (
+            <CommentThread
+              comments={comments}
+              postId={post.id}
+              onAddComment={handleAddComment}
+              onLikeComment={handleLikeComment}
+              currentUser={{
+                id: "user1",
+                name: "Current User",
+                avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b1c5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+              }}
+            />
+          )}
+        </motion.div>
+      )}
     </motion.div>
   );
 };

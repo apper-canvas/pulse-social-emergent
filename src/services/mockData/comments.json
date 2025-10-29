@@ -9,9 +9,11 @@
     "content": "Absolutely stunning shots! The golden hour really makes everything magical. Can't wait to see the final edits!",
     "timestamp": "2024-01-15T09:15:00Z",
     "parentId": null,
-    "likes": 12
+    "likes": 12,
+    "isLikedByCurrentUser": false,
+    "likedBy": []
   },
-  {
+{
     "Id": 2,
     "id": "comment_2",
     "postId": "post_1",
@@ -21,9 +23,11 @@
     "content": "Your photography skills are incredible! What camera settings did you use for these shots?",
     "timestamp": "2024-01-15T10:20:00Z",
     "parentId": null,
-    "likes": 8
+    "likes": 8,
+    "isLikedByCurrentUser": false,
+    "likedBy": []
   },
-  {
+{
     "Id": 3,
     "id": "comment_3",
     "postId": "post_1",
@@ -33,9 +37,11 @@
     "content": "Thank you! I used a Canon 5D Mark IV with a 24-70mm lens. Shot at f/8, ISO 100, and about 1/125 shutter speed.",
     "timestamp": "2024-01-15T11:30:00Z",
     "parentId": "comment_2",
-    "likes": 5
+    "likes": 5,
+    "isLikedByCurrentUser": false,
+    "likedBy": []
   },
-  {
+{
     "Id": 4,
     "id": "comment_4",
     "postId": "post_2",
@@ -45,9 +51,11 @@
     "content": "Love supporting local farmers! Those vegetables look so fresh and vibrant. Nothing beats organic produce.",
     "timestamp": "2024-01-15T12:00:00Z",
     "parentId": null,
-    "likes": 15
+    "likes": 15,
+    "isLikedByCurrentUser": false,
+    "likedBy": []
   },
-  {
+{
     "Id": 5,
     "id": "comment_5",
     "postId": "post_3",
@@ -57,9 +65,11 @@
     "content": "What an amazing view! Hiking in the mountains is so therapeutic. Which trail did you take?",
     "timestamp": "2024-01-14T17:45:00Z",
     "parentId": null,
-    "likes": 20
+    "likes": 20,
+    "isLikedByCurrentUser": false,
+    "likedBy": []
   },
-  {
+{
     "Id": 6,
     "id": "comment_6",
     "postId": "post_4",
@@ -69,9 +79,11 @@
     "content": "This artwork is phenomenal! The blend of watercolor and digital techniques creates such a unique aesthetic.",
     "timestamp": "2024-01-14T15:30:00Z",
     "parentId": null,
-    "likes": 18
+    "likes": 18,
+    "isLikedByCurrentUser": false,
+    "likedBy": []
   },
-  {
+{
     "Id": 7,
     "id": "comment_7",
     "postId": "post_5",
@@ -81,9 +93,11 @@
     "content": "This looks so cozy! I'm currently reading 'The Seven Husbands of Evelyn Hugo' and loving it. What's your current read?",
     "timestamp": "2024-01-14T20:15:00Z",
     "parentId": null,
-    "likes": 7
+    "likes": 7,
+    "isLikedByCurrentUser": false,
+    "likedBy": []
   },
-  {
+{
     "Id": 8,
     "id": "comment_8",
     "postId": "post_6",
@@ -93,6 +107,8 @@
     "content": "Perfect beach day! Nothing beats good friends, sunshine, and volleyball. These are the moments that matter most.",
     "timestamp": "2024-01-13T16:30:00Z",
     "parentId": null,
-    "likes": 14
+    "likes": 14,
+    "isLikedByCurrentUser": false,
+    "likedBy": []
   }
 ]
