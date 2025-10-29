@@ -1,0 +1,98 @@
+[
+  {
+    "Id": 1,
+    "id": "comment_1",
+    "postId": "post_1",
+    "authorId": "user2",
+    "authorName": "Alex Chen",
+    "authorAvatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    "content": "Absolutely stunning shots! The golden hour really makes everything magical. Can't wait to see the final edits!",
+    "timestamp": "2024-01-15T09:15:00Z",
+    "parentId": null,
+    "likes": 12
+  },
+  {
+    "Id": 2,
+    "id": "comment_2",
+    "postId": "post_1",
+    "authorId": "user3",
+    "authorName": "Maria Rodriguez",
+    "authorAvatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    "content": "Your photography skills are incredible! What camera settings did you use for these shots?",
+    "timestamp": "2024-01-15T10:20:00Z",
+    "parentId": null,
+    "likes": 8
+  },
+  {
+    "Id": 3,
+    "id": "comment_3",
+    "postId": "post_1",
+    "authorId": "user1",
+    "authorName": "Sarah Johnson",
+    "authorAvatar": "https://images.unsplash.com/photo-1494790108755-2616b612b1c5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    "content": "Thank you! I used a Canon 5D Mark IV with a 24-70mm lens. Shot at f/8, ISO 100, and about 1/125 shutter speed.",
+    "timestamp": "2024-01-15T11:30:00Z",
+    "parentId": "comment_2",
+    "likes": 5
+  },
+  {
+    "Id": 4,
+    "id": "comment_4",
+    "postId": "post_2",
+    "authorId": "user4",
+    "authorName": "David Kim",
+    "authorAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    "content": "Love supporting local farmers! Those vegetables look so fresh and vibrant. Nothing beats organic produce.",
+    "timestamp": "2024-01-15T12:00:00Z",
+    "parentId": null,
+    "likes": 15
+  },
+  {
+    "Id": 5,
+    "id": "comment_5",
+    "postId": "post_3",
+    "authorId": "user5",
+    "authorName": "Emma Wilson",
+    "authorAvatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    "content": "What an amazing view! Hiking in the mountains is so therapeutic. Which trail did you take?",
+    "timestamp": "2024-01-14T17:45:00Z",
+    "parentId": null,
+    "likes": 20
+  },
+  {
+    "Id": 6,
+    "id": "comment_6",
+    "postId": "post_4",
+    "authorId": "user6",
+    "authorName": "James Thompson",
+    "authorAvatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    "content": "This artwork is phenomenal! The blend of watercolor and digital techniques creates such a unique aesthetic.",
+    "timestamp": "2024-01-14T15:30:00Z",
+    "parentId": null,
+    "likes": 18
+  },
+  {
+    "Id": 7,
+    "id": "comment_7",
+    "postId": "post_5",
+    "authorId": "user7",
+    "authorName": "Lisa Park",
+    "authorAvatar": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    "content": "This looks so cozy! I'm currently reading 'The Seven Husbands of Evelyn Hugo' and loving it. What's your current read?",
+    "timestamp": "2024-01-14T20:15:00Z",
+    "parentId": null,
+    "likes": 7
+  },
+  {
+    "Id": 8,
+    "id": "comment_8",
+    "postId": "post_6",
+    "authorId": "user8",
+    "authorName": "Michael Brown",
+    "authorAvatar": "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    "content": "Perfect beach day! Nothing beats good friends, sunshine, and volleyball. These are the moments that matter most.",
+    "timestamp": "2024-01-13T16:30:00Z",
+    "parentId": null,
+    "likes": 14
+  }
+]
