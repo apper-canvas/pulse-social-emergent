@@ -4,11 +4,11 @@ import ApperIcon from "@/components/ApperIcon";
 import { cn } from "@/utils/cn";
 
 const NavigationBar = ({ className, ...props }) => {
-  const navItems = [
+const navItems = [
     { to: "/", icon: "Home", label: "Home" },
-    { to: "/search", icon: "Search", label: "Search" },
-    { to: "/create", icon: "Plus", label: "Create" },
-    { to: "/profile", icon: "User", label: "Profile" },
+    { to: "search", icon: "Search", label: "Search" },
+    { to: "create", icon: "Plus", label: "Create" },
+    { to: "profile", icon: "User", label: "Profile" },
   ];
 
 return (
